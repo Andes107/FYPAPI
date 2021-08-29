@@ -85,9 +85,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="GenericConverter\Converter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CSEStudent.cs" />
+    <Compile Include="Models\Faculty.cs" />
+    <Compile Include="Models\Fyp.cs" />
+    <Compile Include="Models\FYPCategory.cs" />
+    <Compile Include="Models\InterestedIn.cs" />
+    <Compile Include="Models\ProjectGroup.cs" />
+    <Compile Include="Models\RequirementGrade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +110,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
