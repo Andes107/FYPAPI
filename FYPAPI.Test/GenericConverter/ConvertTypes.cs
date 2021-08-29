@@ -28,4 +28,23 @@ namespace FYPAPI.Test.GenericConverter
         IEnumerator IEnumerable.GetEnumerator()
         { return GetEnumerator(); }
     }
+    public class listOfFaculty : IEnumerable<object[]>
+    {
+        private readonly List<object[]> _data = new List<object[]>
+        {
+            new object[] { "PK_tblFaculties:xavieryu;name:Xavier Yu;roomNo:4962N;facultyCode:XY",
+                new Faculty {
+                PK_tblFaculties = "xavieryu", name = "Xavier Yu", roomNo = "4962N", facultyCode = "XY"
+                }},
+            new object[] { "PK_tblFaculties:xavieryu;name:Xavier Yu",
+                new Faculty {
+                PK_tblFaculties = "xavieryu", name = "Xavier Yu"
+                }}
+        };
+        public IEnumerator<object[]> GetEnumerator()
+        { return _data.GetEnumerator(); }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        { return GetEnumerator(); }
+    }
 }

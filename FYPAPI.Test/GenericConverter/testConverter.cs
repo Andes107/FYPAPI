@@ -38,5 +38,16 @@ namespace FYPAPI.Test.GenericConverter
             //Assert
             Assert.Equal(expected, actual);
         }
+        [Theory, ClassData(typeof(listOfFaculty))]
+        public void testConverFromFaculty(object value, Faculty expected)
+        {
+            //Arrange
+            Converter<Faculty> testConverter = new Converter<Faculty>();
+            Mock<ITypeDescriptorContext> mockDescContext = new Mock<ITypeDescriptorContext>();
+            //Act
+            Faculty actual = testConverter.ConvertFrom(mockDescContext.Object, null, value) as Faculty;
+            //Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
