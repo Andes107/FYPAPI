@@ -45,16 +45,11 @@ namespace FYPAPI.Binder
                 return false;
             }
 
-            FYPCategory result = null;
-            if (FYPCategory.TryParse(key, out result) && _categories.Any(cat => result.PK_tblFypCategories.Contains(cat)))
-            {
-                bindingContext.Model = result;
-                return true;
-            }
-
-            bindingContext.ModelState.AddModelError(
-                bindingContext.ModelName, "Cannot convert value to FYPCategory");
-            return false;
+            FYPCategory result = new FYPCategory();
+            if (FYPCategory.TryParse(key, result) && !_categories.Any(cat => result.PK_tblFypCategories.Contains(cat)))
+                result.PK_tblFypCategories = null;
+            bindingContext.Model = result;
+            return true;
         }
     }
 }

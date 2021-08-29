@@ -15,10 +15,10 @@ namespace FYPAPI.Test.Binder
         public void test(string queryParameter, FYPCategory expected)
         {
             //Arrange
-            FYPCategory actual;
+            FYPCategory actual = new FYPCategory();
 
             //Act
-            FYPCategory.TryParse(queryParameter, out actual);
+            FYPCategory.TryParse(queryParameter, actual);
 
             //Assert
             Assert.Equal(expected, actual);
