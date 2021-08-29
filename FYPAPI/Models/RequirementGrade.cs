@@ -1,7 +1,10 @@
-﻿using System;
+﻿using FYPAPI.GenericConverter;
+using System;
+using System.ComponentModel;
 
 namespace FYPAPI.Models
 {
+    [TypeConverter(typeof(Converter<RequirementGrade>))]
     public class RequirementGrade: IEquatable<RequirementGrade>
     {
         public string facultyUsername { get; set; }

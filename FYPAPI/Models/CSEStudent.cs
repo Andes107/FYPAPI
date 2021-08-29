@@ -1,7 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
+using FYPAPI.GenericConverter;
 
 namespace FYPAPI.Models
 {
+    [TypeConverter(typeof(Converter<CSEStudent>))]
     public class CSEStudent: IEquatable<CSEStudent>
     {
         public string PK_tblCSEStudents { get; set; }
