@@ -10,5 +10,17 @@ namespace FYPAPI.Models
         {
             return (this.PK_tblFypCategories == other.PK_tblFypCategories);
         }
+        public static bool TryParse(string queryParameter, out FYPCategory result)
+        {
+            result = new FYPCategory();
+
+            if (queryParameter is null) return false;
+            
+            string[] parts = queryParameter.Split(':');
+            if (parts.Length != 2) return false;
+            
+            result.PK_tblFypCategories = parts[1];
+            return true;
+        }
     }
 }

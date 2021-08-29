@@ -71,6 +71,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binder\BinderType.cs" />
+    <Compile Include="Binder\testBinder.cs" />
+    <Compile Include="Binder\testTryParse.cs" />
     <Compile Include="GenericConverter\testConverter.cs" />
     <Compile Include="GenericConverter\ConvertTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +91,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
