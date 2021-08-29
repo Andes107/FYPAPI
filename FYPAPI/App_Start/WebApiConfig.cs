@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 namespace FYPAPI
@@ -19,6 +21,15 @@ namespace FYPAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            JsonSerializerSettings jsonSettings = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
+            jsonSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            jsonSettings.Formatting = Formatting.Indented;
+            jsonSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+            jsonSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
+
+            XmlMediaTypeFormatter xml = GlobalConfiguration.Configuration.Formatters.XmlFormatter;
+            xml.Indent = true;
         }
     }
 }
