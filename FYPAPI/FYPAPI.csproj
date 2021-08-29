@@ -86,6 +86,8 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Binder\FYPCategoryModelBinder.cs" />
+    <Compile Include="BindingAttribute\ETagParameterBinding.cs" />
+    <Compile Include="BindingAttribute\IfNoneMatchAttribute.cs" />
     <Compile Include="GenericConverter\Converter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

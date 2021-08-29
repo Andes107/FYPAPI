@@ -83,6 +83,7 @@
     <Compile Include="Binder\BinderType.cs" />
     <Compile Include="Binder\testBinder.cs" />
     <Compile Include="Binder\testTryParse.cs" />
+    <Compile Include="BindingAttribute\testParameterBinding.cs" />
     <Compile Include="GenericConverter\testConverter.cs" />
     <Compile Include="GenericConverter\ConvertTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
