@@ -16,12 +16,16 @@ namespace FYPAPI.Controllers
     {
         private readonly IUnitOfWork _context;
         public CSEStudentController(IUnitOfWork context) { _context = context; }
+        [HttpGet]
         [Route("getmany")]
         public IHttpActionResult GetMany(CSEStudent student) { return Ok(_context.CSEStudents.FindMany(student)); }
+        [HttpGet]
         [Route("getone")]
         public HttpResponseMessage GetOne(string PK_tblCSEStudents, [IfNoneMatch]string etag)
         {
-            CSEStudent stud = _context.CSEStudents.Get(PK_tblCSEStudents);
+            if (_context.CSEStudents.NoneMatch(PK_tblCSEStudents, etag))
+                return Request.CreateResponse(HttpStatusCode.NotModified,_context.CSEStudents.Get(PK_tblCSEStudents));
+            return new HttpResponseMessage(HttpStatusCode.NotModified);
         }
     }
 }

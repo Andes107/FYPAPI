@@ -88,6 +88,7 @@
     <Compile Include="Binder\FYPCategoryModelBinder.cs" />
     <Compile Include="BindingAttribute\ETagParameterBinding.cs" />
     <Compile Include="BindingAttribute\IfNoneMatchAttribute.cs" />
+    <Compile Include="Controllers\CSEStudentController.cs" />
     <Compile Include="GenericConverter\Converter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -100,6 +101,9 @@
     <Compile Include="Models\ProjectGroup.cs" />
     <Compile Include="Models\RequirementGrade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UOWRepositories\AllRepoInterfaces.cs" />
+    <Compile Include="UOWRepositories\IRepository.cs" />
+    <Compile Include="UOWRepositories\IUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -112,7 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
