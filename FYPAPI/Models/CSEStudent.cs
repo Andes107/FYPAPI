@@ -9,7 +9,7 @@ namespace FYPAPI.Models
     {
         public string PK_tblCSEStudents { get; set; }
         public string name { get; set; }
-        public int? groupId { get; set; }
+        public short? groupId { get; set; }
 
         public bool Equals(CSEStudent other)
         {

@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 using FYPAPI.UOWRepositories;
 using FYPAPI.Models;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace FYPAPI.Infrastructure.Repositories
 {
-    public class CSEStudentRepository : IRepository<CSEStudent>, ICSEStudent
+    public class CSEStudentRepository : ICSEStudent
     {
         private readonly FYPContext _context;
         private readonly IMapper _mapper;
-        public CSEStudentRepository(FYPContext context, IMapper mapper) 
+        private readonly MapperConfiguration _config;
+        public CSEStudentRepository(FYPContext context, IMapper mapper, MapperConfiguration config) 
         { 
             _context = context;
             _mapper = mapper;
+            _config = config;
         }
         public IEnumerable<CSEStudent> GetAll()
         {
-            return _mapper.ProjectTo<CSEStudent>(_context.tblCSEStudents)
-                            .ToList();
+            return _context.tblCSEStudents.ProjectTo<CSEStudent>(_config).ToList();
         }
         public IEnumerable<CSEStudent> FindMany(CSEStudent entity)
         {

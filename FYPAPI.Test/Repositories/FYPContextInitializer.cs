@@ -94,8 +94,6 @@ namespace FYPAPI.Test.Repositories
             context.tblProjectGroups.Add(new tblProjectGroup(15, null, null, null));
             context.tblProjectGroups.Add(new tblProjectGroup(16, null, null, null));
 
-            context.SaveChanges();
-
             //Initialize Supervises
             context.tblSupervises.Add(new tblSupervis("cafarella", 1));
             context.tblSupervises.Add(new tblSupervis("cafarella", 2));
