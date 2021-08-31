@@ -100,7 +100,7 @@
     <Compile Include="GenericConverter\testConverter.cs" />
     <Compile Include="GenericConverter\ConvertTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EffortProviderFactory.cs" />
+    <Compile Include="Repositories\FYPContextInitializer.cs" />
     <Compile Include="Repositories\testRepository.cs" />
   </ItemGroup>
   <ItemGroup>
