@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FYPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCSEStudents">
+          <Key>
+            <PropertyRef Name="PK_tblCSEStudents" />
+          </Key>
+          <Property Name="PK_tblCSEStudents" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="groupId" Type="smallint" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="tblFaculties">
+          <Key>
+            <PropertyRef Name="PK_tblFaculties" />
+          </Key>
+          <Property Name="PK_tblFaculties" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="roomNo" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="facultyCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="tblFyp">
+          <Key>
+            <PropertyRef Name="PK_tblFyp" />
+          </Key>
+          <Property Name="PK_tblFyp" Type="smallint" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="1200" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="otherRequirements" Type="varchar" MaxLength="200" />
+          <Property Name="minStudents" Type="smallint" Nullable="false" />
+          <Property Name="maxStudents" Type="smallint" Nullable="false" />
+          <Property Name="isAvailable" Type="bit" Nullable="false" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="tblFypCategories">
+          <Key>
+            <PropertyRef Name="PK_tblFypCategories" />
+          </Key>
+          <Property Name="PK_tblFypCategories" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="tblInterestedIn">
+          <Key>
+            <PropertyRef Name="fypId" />
+            <PropertyRef Name="groupId" />
+          </Key>
+          <Property Name="fypId" Type="smallint" Nullable="false" />
+          <Property Name="groupId" Type="smallint" Nullable="false" />
+          <Property Name="priority" Type="smallint" Nullable="false" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="tblProjectGroups">
+          <Key>
+            <PropertyRef Name="PK_tblProjectGroups" />
+          </Key>
+          <Property Name="PK_tblProjectGroups" Type="smallint" Nullable="false" />
+          <Property Name="groupCode" Type="varchar" MaxLength="5" />
+          <Property Name="assignedFYP" Type="smallint" />
+          <Property Name="reader" Type="varchar" MaxLength="15" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="tblRequirementGrades">
+          <Key>
+            <PropertyRef Name="facultyUsername" />
+            <PropertyRef Name="studentUsername" />
+          </Key>
+          <Property Name="facultyUsername" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="studentUsername" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="proposalReport" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="progressReport" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="finalReport" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="presentation" Type="decimal" Precision="4" Scale="1" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="tblSupervises">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="fypId" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="fypId" Type="smallint" Nullable="false" />
+          <Property Name="etag" Type="varchar" MaxLength="14" />
+        </EntityType>
+        <Association Name="FK_tblCSEStudents_tblProjectGroups">
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroups" Multiplicity="0..1" />
+          <End Role="tblCSEStudents" Type="Self.tblCSEStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProjectGroups">
+              <PropertyRef Name="PK_tblProjectGroups" />
+            </Principal>
+            <Dependent Role="tblCSEStudents">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFyp_tblFypCategories">
+          <End Role="tblFypCategories" Type="Self.tblFypCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFypCategories">
+              <PropertyRef Name="PK_tblFypCategories" />
+            </Principal>
+            <Dependent Role="tblFyp">
+              <PropertyRef Name="category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInterestedIn_tblFyp">
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="1" />
+          <End Role="tblInterestedIn" Type="Self.tblInterestedIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFyp">
+              <PropertyRef Name="PK_tblFyp" />
+            </Principal>
+            <Dependent Role="tblInterestedIn">
+              <PropertyRef Name="fypId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInterestedIn_tblProjectGroups">
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroups" Multiplicity="1" />
+          <End Role="tblInterestedIn" Type="Self.tblInterestedIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProjectGroups">
+              <PropertyRef Name="PK_tblProjectGroups" />
+            </Principal>
+            <Dependent Role="tblInterestedIn">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProjectGroups_tblFaculties">
+          <End Role="tblFaculties" Type="Self.tblFaculties" Multiplicity="0..1" />
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFaculties">
+              <PropertyRef Name="PK_tblFaculties" />
+            </Principal>
+            <Dependent Role="tblProjectGroups">
+              <PropertyRef Name="reader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProjectGroups_tblFyp">
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="0..1" />
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFyp">
+              <PropertyRef Name="PK_tblFyp" />
+            </Principal>
+            <Dependent Role="tblProjectGroups">
+              <PropertyRef Name="assignedFYP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRequirementGrades_tblCSEStudents">
+          <End Role="tblCSEStudents" Type="Self.tblCSEStudents" Multiplicity="1" />
+          <End Role="tblRequirementGrades" Type="Self.tblRequirementGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCSEStudents">
+              <PropertyRef Name="PK_tblCSEStudents" />
+            </Principal>
+            <Dependent Role="tblRequirementGrades">
+              <PropertyRef Name="studentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRequirementGrades_tblFaculties">
+          <End Role="tblFaculties" Type="Self.tblFaculties" Multiplicity="1" />
+          <End Role="tblRequirementGrades" Type="Self.tblRequirementGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFaculties">
+              <PropertyRef Name="PK_tblFaculties" />
+            </Principal>
+            <Dependent Role="tblRequirementGrades">
+              <PropertyRef Name="facultyUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSupervises_tblFaculties">
+          <End Role="tblFaculties" Type="Self.tblFaculties" Multiplicity="1" />
+          <End Role="tblSupervises" Type="Self.tblSupervises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFaculties">
+              <PropertyRef Name="PK_tblFaculties" />
+            </Principal>
+            <Dependent Role="tblSupervises">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSupervises_tblFyp">
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="1" />
+          <End Role="tblSupervises" Type="Self.tblSupervises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFyp">
+              <PropertyRef Name="PK_tblFyp" />
+            </Principal>
+            <Dependent Role="tblSupervises">
+              <PropertyRef Name="fypId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FYPModelStoreContainer">
+          <EntitySet Name="tblCSEStudents" EntityType="Self.tblCSEStudents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFaculties" EntityType="Self.tblFaculties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFyp" EntityType="Self.tblFyp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFypCategories" EntityType="Self.tblFypCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInterestedIn" EntityType="Self.tblInterestedIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectGroups" EntityType="Self.tblProjectGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRequirementGrades" EntityType="Self.tblRequirementGrades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSupervises" EntityType="Self.tblSupervises" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblCSEStudents_tblProjectGroups" Association="Self.FK_tblCSEStudents_tblProjectGroups">
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+            <End Role="tblCSEStudents" EntitySet="tblCSEStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFyp_tblFypCategories" Association="Self.FK_tblFyp_tblFypCategories">
+            <End Role="tblFypCategories" EntitySet="tblFypCategories" />
+            <End Role="tblFyp" EntitySet="tblFyp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInterestedIn_tblFyp" Association="Self.FK_tblInterestedIn_tblFyp">
+            <End Role="tblFyp" EntitySet="tblFyp" />
+            <End Role="tblInterestedIn" EntitySet="tblInterestedIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInterestedIn_tblProjectGroups" Association="Self.FK_tblInterestedIn_tblProjectGroups">
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+            <End Role="tblInterestedIn" EntitySet="tblInterestedIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProjectGroups_tblFaculties" Association="Self.FK_tblProjectGroups_tblFaculties">
+            <End Role="tblFaculties" EntitySet="tblFaculties" />
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProjectGroups_tblFyp" Association="Self.FK_tblProjectGroups_tblFyp">
+            <End Role="tblFyp" EntitySet="tblFyp" />
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRequirementGrades_tblCSEStudents" Association="Self.FK_tblRequirementGrades_tblCSEStudents">
+            <End Role="tblCSEStudents" EntitySet="tblCSEStudents" />
+            <End Role="tblRequirementGrades" EntitySet="tblRequirementGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRequirementGrades_tblFaculties" Association="Self.FK_tblRequirementGrades_tblFaculties">
+            <End Role="tblFaculties" EntitySet="tblFaculties" />
+            <End Role="tblRequirementGrades" EntitySet="tblRequirementGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSupervises_tblFaculties" Association="Self.FK_tblSupervises_tblFaculties">
+            <End Role="tblFaculties" EntitySet="tblFaculties" />
+            <End Role="tblSupervises" EntitySet="tblSupervises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSupervises_tblFyp" Association="Self.FK_tblSupervises_tblFyp">
+            <End Role="tblFyp" EntitySet="tblFyp" />
+            <End Role="tblSupervises" EntitySet="tblSupervises" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FYPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblCSEStudent">
+          <Key>
+            <PropertyRef Name="PK_tblCSEStudents" />
+          </Key>
+          <Property Name="PK_tblCSEStudents" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="groupId" Type="Int16" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblProjectGroup" Relationship="Self.FK_tblCSEStudents_tblProjectGroups" FromRole="tblCSEStudents" ToRole="tblProjectGroups" />
+          <NavigationProperty Name="tblRequirementGrades" Relationship="Self.FK_tblRequirementGrades_tblCSEStudents" FromRole="tblCSEStudents" ToRole="tblRequirementGrades" />
+        </EntityType>
+        <EntityType Name="tblFaculty">
+          <Key>
+            <PropertyRef Name="PK_tblFaculties" />
+          </Key>
+          <Property Name="PK_tblFaculties" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="roomNo" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="facultyCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblProjectGroups" Relationship="Self.FK_tblProjectGroups_tblFaculties" FromRole="tblFaculties" ToRole="tblProjectGroups" />
+          <NavigationProperty Name="tblRequirementGrades" Relationship="Self.FK_tblRequirementGrades_tblFaculties" FromRole="tblFaculties" ToRole="tblRequirementGrades" />
+          <NavigationProperty Name="tblSupervises" Relationship="Self.FK_tblSupervises_tblFaculties" FromRole="tblFaculties" ToRole="tblSupervises" />
+        </EntityType>
+        <EntityType Name="tblFyp">
+          <Key>
+            <PropertyRef Name="PK_tblFyp" />
+          </Key>
+          <Property Name="PK_tblFyp" Type="Int16" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="otherRequirements" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="minStudents" Type="Int16" Nullable="false" />
+          <Property Name="maxStudents" Type="Int16" Nullable="false" />
+          <Property Name="isAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblFypCategory" Relationship="Self.FK_tblFyp_tblFypCategories" FromRole="tblFyp" ToRole="tblFypCategories" />
+          <NavigationProperty Name="tblInterestedIns" Relationship="Self.FK_tblInterestedIn_tblFyp" FromRole="tblFyp" ToRole="tblInterestedIn" />
+          <NavigationProperty Name="tblProjectGroups" Relationship="Self.FK_tblProjectGroups_tblFyp" FromRole="tblFyp" ToRole="tblProjectGroups" />
+          <NavigationProperty Name="tblSupervises" Relationship="Self.FK_tblSupervises_tblFyp" FromRole="tblFyp" ToRole="tblSupervises" />
+        </EntityType>
+        <EntityType Name="tblFypCategory">
+          <Key>
+            <PropertyRef Name="PK_tblFypCategories" />
+          </Key>
+          <Property Name="PK_tblFypCategories" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblFyps" Relationship="Self.FK_tblFyp_tblFypCategories" FromRole="tblFypCategories" ToRole="tblFyp" />
+        </EntityType>
+        <EntityType Name="tblInterestedIn">
+          <Key>
+            <PropertyRef Name="fypId" />
+            <PropertyRef Name="groupId" />
+          </Key>
+          <Property Name="fypId" Type="Int16" Nullable="false" />
+          <Property Name="groupId" Type="Int16" Nullable="false" />
+          <Property Name="priority" Type="Int16" Nullable="false" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblFyp" Relationship="Self.FK_tblInterestedIn_tblFyp" FromRole="tblInterestedIn" ToRole="tblFyp" />
+          <NavigationProperty Name="tblProjectGroup" Relationship="Self.FK_tblInterestedIn_tblProjectGroups" FromRole="tblInterestedIn" ToRole="tblProjectGroups" />
+        </EntityType>
+        <EntityType Name="tblProjectGroup">
+          <Key>
+            <PropertyRef Name="PK_tblProjectGroups" />
+          </Key>
+          <Property Name="PK_tblProjectGroups" Type="Int16" Nullable="false" />
+          <Property Name="groupCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="assignedFYP" Type="Int16" />
+          <Property Name="reader" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCSEStudents" Relationship="Self.FK_tblCSEStudents_tblProjectGroups" FromRole="tblProjectGroups" ToRole="tblCSEStudents" />
+          <NavigationProperty Name="tblFaculty" Relationship="Self.FK_tblProjectGroups_tblFaculties" FromRole="tblProjectGroups" ToRole="tblFaculties" />
+          <NavigationProperty Name="tblFyp" Relationship="Self.FK_tblProjectGroups_tblFyp" FromRole="tblProjectGroups" ToRole="tblFyp" />
+          <NavigationProperty Name="tblInterestedIns" Relationship="Self.FK_tblInterestedIn_tblProjectGroups" FromRole="tblProjectGroups" ToRole="tblInterestedIn" />
+        </EntityType>
+        <EntityType Name="tblRequirementGrade">
+          <Key>
+            <PropertyRef Name="facultyUsername" />
+            <PropertyRef Name="studentUsername" />
+          </Key>
+          <Property Name="facultyUsername" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="studentUsername" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="proposalReport" Type="Decimal" Precision="4" Scale="1" />
+          <Property Name="progressReport" Type="Decimal" Precision="4" Scale="1" />
+          <Property Name="finalReport" Type="Decimal" Precision="4" Scale="1" />
+          <Property Name="presentation" Type="Decimal" Precision="4" Scale="1" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCSEStudent" Relationship="Self.FK_tblRequirementGrades_tblCSEStudents" FromRole="tblRequirementGrades" ToRole="tblCSEStudents" />
+          <NavigationProperty Name="tblFaculty" Relationship="Self.FK_tblRequirementGrades_tblFaculties" FromRole="tblRequirementGrades" ToRole="tblFaculties" />
+        </EntityType>
+        <EntityType Name="tblSupervis">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="fypId" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fypId" Type="Int16" Nullable="false" />
+          <Property Name="etag" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblFaculty" Relationship="Self.FK_tblSupervises_tblFaculties" FromRole="tblSupervises" ToRole="tblFaculties" />
+          <NavigationProperty Name="tblFyp" Relationship="Self.FK_tblSupervises_tblFyp" FromRole="tblSupervises" ToRole="tblFyp" />
+        </EntityType>
+        <Association Name="FK_tblCSEStudents_tblProjectGroups">
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroup" Multiplicity="0..1" />
+          <End Role="tblCSEStudents" Type="Self.tblCSEStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProjectGroups">
+              <PropertyRef Name="PK_tblProjectGroups" />
+            </Principal>
+            <Dependent Role="tblCSEStudents">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRequirementGrades_tblCSEStudents">
+          <End Role="tblCSEStudents" Type="Self.tblCSEStudent" Multiplicity="1" />
+          <End Role="tblRequirementGrades" Type="Self.tblRequirementGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCSEStudents">
+              <PropertyRef Name="PK_tblCSEStudents" />
+            </Principal>
+            <Dependent Role="tblRequirementGrades">
+              <PropertyRef Name="studentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProjectGroups_tblFaculties">
+          <End Role="tblFaculties" Type="Self.tblFaculty" Multiplicity="0..1" />
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFaculties">
+              <PropertyRef Name="PK_tblFaculties" />
+            </Principal>
+            <Dependent Role="tblProjectGroups">
+              <PropertyRef Name="reader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRequirementGrades_tblFaculties">
+          <End Role="tblFaculties" Type="Self.tblFaculty" Multiplicity="1" />
+          <End Role="tblRequirementGrades" Type="Self.tblRequirementGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFaculties">
+              <PropertyRef Name="PK_tblFaculties" />
+            </Principal>
+            <Dependent Role="tblRequirementGrades">
+              <PropertyRef Name="facultyUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSupervises_tblFaculties">
+          <End Role="tblFaculties" Type="Self.tblFaculty" Multiplicity="1" />
+          <End Role="tblSupervises" Type="Self.tblSupervis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFaculties">
+              <PropertyRef Name="PK_tblFaculties" />
+            </Principal>
+            <Dependent Role="tblSupervises">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFyp_tblFypCategories">
+          <End Role="tblFypCategories" Type="Self.tblFypCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFypCategories">
+              <PropertyRef Name="PK_tblFypCategories" />
+            </Principal>
+            <Dependent Role="tblFyp">
+              <PropertyRef Name="category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInterestedIn_tblFyp">
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="1" />
+          <End Role="tblInterestedIn" Type="Self.tblInterestedIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFyp">
+              <PropertyRef Name="PK_tblFyp" />
+            </Principal>
+            <Dependent Role="tblInterestedIn">
+              <PropertyRef Name="fypId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProjectGroups_tblFyp">
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="0..1" />
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFyp">
+              <PropertyRef Name="PK_tblFyp" />
+            </Principal>
+            <Dependent Role="tblProjectGroups">
+              <PropertyRef Name="assignedFYP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSupervises_tblFyp">
+          <End Role="tblFyp" Type="Self.tblFyp" Multiplicity="1" />
+          <End Role="tblSupervises" Type="Self.tblSupervis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFyp">
+              <PropertyRef Name="PK_tblFyp" />
+            </Principal>
+            <Dependent Role="tblSupervises">
+              <PropertyRef Name="fypId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInterestedIn_tblProjectGroups">
+          <End Role="tblProjectGroups" Type="Self.tblProjectGroup" Multiplicity="1" />
+          <End Role="tblInterestedIn" Type="Self.tblInterestedIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProjectGroups">
+              <PropertyRef Name="PK_tblProjectGroups" />
+            </Principal>
+            <Dependent Role="tblInterestedIn">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FYPContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblCSEStudents" EntityType="Self.tblCSEStudent" />
+          <EntitySet Name="tblFaculties" EntityType="Self.tblFaculty" />
+          <EntitySet Name="tblFyps" EntityType="Self.tblFyp" />
+          <EntitySet Name="tblFypCategories" EntityType="Self.tblFypCategory" />
+          <EntitySet Name="tblInterestedIns" EntityType="Self.tblInterestedIn" />
+          <EntitySet Name="tblProjectGroups" EntityType="Self.tblProjectGroup" />
+          <EntitySet Name="tblRequirementGrades" EntityType="Self.tblRequirementGrade" />
+          <EntitySet Name="tblSupervises" EntityType="Self.tblSupervis" />
+          <AssociationSet Name="FK_tblCSEStudents_tblProjectGroups" Association="Self.FK_tblCSEStudents_tblProjectGroups">
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+            <End Role="tblCSEStudents" EntitySet="tblCSEStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRequirementGrades_tblCSEStudents" Association="Self.FK_tblRequirementGrades_tblCSEStudents">
+            <End Role="tblCSEStudents" EntitySet="tblCSEStudents" />
+            <End Role="tblRequirementGrades" EntitySet="tblRequirementGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProjectGroups_tblFaculties" Association="Self.FK_tblProjectGroups_tblFaculties">
+            <End Role="tblFaculties" EntitySet="tblFaculties" />
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRequirementGrades_tblFaculties" Association="Self.FK_tblRequirementGrades_tblFaculties">
+            <End Role="tblFaculties" EntitySet="tblFaculties" />
+            <End Role="tblRequirementGrades" EntitySet="tblRequirementGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSupervises_tblFaculties" Association="Self.FK_tblSupervises_tblFaculties">
+            <End Role="tblFaculties" EntitySet="tblFaculties" />
+            <End Role="tblSupervises" EntitySet="tblSupervises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFyp_tblFypCategories" Association="Self.FK_tblFyp_tblFypCategories">
+            <End Role="tblFypCategories" EntitySet="tblFypCategories" />
+            <End Role="tblFyp" EntitySet="tblFyps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInterestedIn_tblFyp" Association="Self.FK_tblInterestedIn_tblFyp">
+            <End Role="tblFyp" EntitySet="tblFyps" />
+            <End Role="tblInterestedIn" EntitySet="tblInterestedIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProjectGroups_tblFyp" Association="Self.FK_tblProjectGroups_tblFyp">
+            <End Role="tblFyp" EntitySet="tblFyps" />
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSupervises_tblFyp" Association="Self.FK_tblSupervises_tblFyp">
+            <End Role="tblFyp" EntitySet="tblFyps" />
+            <End Role="tblSupervises" EntitySet="tblSupervises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInterestedIn_tblProjectGroups" Association="Self.FK_tblInterestedIn_tblProjectGroups">
+            <End Role="tblProjectGroups" EntitySet="tblProjectGroups" />
+            <End Role="tblInterestedIn" EntitySet="tblInterestedIns" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FYPModelStoreContainer" CdmEntityContainer="FYPContext">
+          <EntitySetMapping Name="tblCSEStudents">
+            <EntityTypeMapping TypeName="FYPModel.tblCSEStudent">
+              <MappingFragment StoreEntitySet="tblCSEStudents">
+                <ScalarProperty Name="PK_tblCSEStudents" ColumnName="PK_tblCSEStudents" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFaculties">
+            <EntityTypeMapping TypeName="FYPModel.tblFaculty">
+              <MappingFragment StoreEntitySet="tblFaculties">
+                <ScalarProperty Name="PK_tblFaculties" ColumnName="PK_tblFaculties" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="roomNo" ColumnName="roomNo" />
+                <ScalarProperty Name="facultyCode" ColumnName="facultyCode" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFyps">
+            <EntityTypeMapping TypeName="FYPModel.tblFyp">
+              <MappingFragment StoreEntitySet="tblFyp">
+                <ScalarProperty Name="PK_tblFyp" ColumnName="PK_tblFyp" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="otherRequirements" ColumnName="otherRequirements" />
+                <ScalarProperty Name="minStudents" ColumnName="minStudents" />
+                <ScalarProperty Name="maxStudents" ColumnName="maxStudents" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFypCategories">
+            <EntityTypeMapping TypeName="FYPModel.tblFypCategory">
+              <MappingFragment StoreEntitySet="tblFypCategories">
+                <ScalarProperty Name="PK_tblFypCategories" ColumnName="PK_tblFypCategories" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInterestedIns">
+            <EntityTypeMapping TypeName="FYPModel.tblInterestedIn">
+              <MappingFragment StoreEntitySet="tblInterestedIn">
+                <ScalarProperty Name="fypId" ColumnName="fypId" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjectGroups">
+            <EntityTypeMapping TypeName="FYPModel.tblProjectGroup">
+              <MappingFragment StoreEntitySet="tblProjectGroups">
+                <ScalarProperty Name="PK_tblProjectGroups" ColumnName="PK_tblProjectGroups" />
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
+                <ScalarProperty Name="assignedFYP" ColumnName="assignedFYP" />
+                <ScalarProperty Name="reader" ColumnName="reader" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRequirementGrades">
+            <EntityTypeMapping TypeName="FYPModel.tblRequirementGrade">
+              <MappingFragment StoreEntitySet="tblRequirementGrades">
+                <ScalarProperty Name="facultyUsername" ColumnName="facultyUsername" />
+                <ScalarProperty Name="studentUsername" ColumnName="studentUsername" />
+                <ScalarProperty Name="proposalReport" ColumnName="proposalReport" />
+                <ScalarProperty Name="progressReport" ColumnName="progressReport" />
+                <ScalarProperty Name="finalReport" ColumnName="finalReport" />
+                <ScalarProperty Name="presentation" ColumnName="presentation" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSupervises">
+            <EntityTypeMapping TypeName="FYPModel.tblSupervis">
+              <MappingFragment StoreEntitySet="tblSupervises">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fypId" ColumnName="fypId" />
+                <ScalarProperty Name="etag" ColumnName="etag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

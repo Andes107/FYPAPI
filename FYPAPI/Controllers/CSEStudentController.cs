@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Web.Http;
 using FYPAPI.BindingAttribute;
@@ -23,9 +24,13 @@ namespace FYPAPI.Controllers
         [Route("getone")]
         public HttpResponseMessage GetOne(string PK_tblCSEStudents, [IfNoneMatch]string etag)
         {
-            if (_context.CSEStudents.NoneMatch(PK_tblCSEStudents, etag))
-                return Request.CreateResponse(HttpStatusCode.NotModified,_context.CSEStudents.Get(PK_tblCSEStudents));
-            return new HttpResponseMessage(HttpStatusCode.NotModified);
+            string newETag = etag;
+            CSEStudent stud = _context.CSEStudents.Get(PK_tblCSEStudents, etag, ref newETag);
+            if (stud is null)
+                return new HttpResponseMessage(HttpStatusCode.NotModified);
+            HttpResponseMessage returnMessage = Request.CreateResponse(HttpStatusCode.OK, stud);
+            returnMessage.Headers.ETag = new EntityTagHeaderValue(newETag);
+            return returnMessage;
         }
     }
 }

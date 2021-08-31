@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYPAPI", "FYPAPI\FYPAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYPAPI.Test", "FYPAPI.Test\FYPAPI.Test.csproj", "{4D579EB3-2B02-4485-A0AF-61B525549BB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYPAPI.Infrastructure", "FYPAPI.Infrastructure\FYPAPI.Infrastructure.csproj", "{5805945B-1C84-4CB0-9AFF-6553803E22A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4D579EB3-2B02-4485-A0AF-61B525549BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D579EB3-2B02-4485-A0AF-61B525549BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D579EB3-2B02-4485-A0AF-61B525549BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5805945B-1C84-4CB0-9AFF-6553803E22A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5805945B-1C84-4CB0-9AFF-6553803E22A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5805945B-1C84-4CB0-9AFF-6553803E22A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5805945B-1C84-4CB0-9AFF-6553803E22A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

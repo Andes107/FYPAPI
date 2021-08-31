@@ -7,6 +7,5 @@ namespace FYPAPI.UOWRepositories
     {
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> FindMany(TEntity entity);
-        void Add(TEntity entity);
     }
 }
