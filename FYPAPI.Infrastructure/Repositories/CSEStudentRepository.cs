@@ -28,11 +28,11 @@ namespace FYPAPI.Infrastructure.Repositories
         }
         public IEnumerable<CSEStudent> FindMany(CSEStudent entity)
         {
-            return _mapper.ProjectTo<CSEStudent>(_context.tblCSEStudents
+            return _context.tblCSEStudents
                 .Where(x => entity.PK_tblCSEStudents == null || x.PK_tblCSEStudents == entity.PK_tblCSEStudents)
                 .Where(x => entity.name == null || x.name == entity.name)
-                .Where(x => entity.groupId == null || x.groupId == entity.groupId))
-                .ToList();
+                .Where(x => entity.groupId == null || x.groupId == entity.groupId)
+                .ProjectTo<CSEStudent>(_config).ToList();
         }
         public CSEStudent Get(string PK_tblCSEStudents, string etag, ref string newETag)
         {

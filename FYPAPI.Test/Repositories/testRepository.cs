@@ -43,7 +43,7 @@ namespace FYPAPI.Test.Repositories
             Assert.Equal(15, students.Count);
         }
         [Fact]
-        public void testCSEStudentRepository()
+        public void testCSEStudentRepositoryGetAll()
         {
             //Arrange
             ICSEStudent csestudentRepo = new CSEStudentRepository(_context, null, _config);
@@ -51,6 +51,17 @@ namespace FYPAPI.Test.Repositories
             List<CSEStudent> lsitOFStuds = csestudentRepo.GetAll().ToList();
             //Assert
             Assert.Equal(40, lsitOFStuds.Count);
+        }
+        [Fact]
+        public void testCSEStudentRepositorFindMany()
+        {
+            //Arrange
+            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, null, _config);
+            CSEStudent mockStud = new CSEStudent() { PK_tblCSEStudents = "brunoho" };
+            //Act
+            List <CSEStudent> lsitOFStuds = csestudentRepo.FindMany(mockStud).ToList();
+            //Assert
+            Assert.Equal(1, lsitOFStuds.Count);
         }
     }
 }
