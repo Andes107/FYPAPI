@@ -20,37 +20,30 @@ namespace FYPAPI.Test.Repositories
             Effort.Provider.EffortProviderConfiguration.RegisterProvider();
         }
     }
-    public class testRepository: IClassFixture<repositoryFixture>
+    public class testRepository: IClassFixture<repositoryFixture>, IDisposable
     {
         private readonly FYPContext _context;
         private readonly MapperConfiguration _config;
-
+        private readonly IMapper _mapper;
         public testRepository()
         {
             _config = new MapperConfiguration(cfg => cfg.CreateMap<tblCSEStudent, CSEStudent>());
+            _mapper = _config.CreateMapper();
             EntityConnection connection = Effort.EntityConnectionFactory.CreatePersistent("name=FYPContext");
             _context = new FYPContext(connection);
             FYPContextInitializer.ContextInit(_context);
         }
-        [Fact]
-        public void testContext()
-        {
-            List<tblFypCategory> students = new List<tblFypCategory>();
-            using (_context)
-            {
-                students = _context.tblFypCategories.ToList();
-            }
-            Assert.Equal(15, students.Count);
-        }
+        public void Dispose() { _context.Dispose(); }
         [Fact]
         public void testCSEStudentRepositoryGetAll()
         {
             //Arrange
             ICSEStudent csestudentRepo = new CSEStudentRepository(_context, null, _config);
             //Act
-            List<CSEStudent> lsitOFStuds = csestudentRepo.GetAll().ToList();
+            List<CSEStudent> actualListOfStuds = csestudentRepo.GetAll().ToList();
+            List<CSEStudent> expectedListOfStuds = _mapper.Map<IEnumerable<tblCSEStudent>, IEnumerable<CSEStudent>>(FYPContextInitializer.studs).ToList();
             //Assert
-            Assert.Equal(40, lsitOFStuds.Count);
+            Assert.Equal(expectedListOfStuds, actualListOfStuds);
         }
         [Fact]
         public void testCSEStudentRepositorFindMany()

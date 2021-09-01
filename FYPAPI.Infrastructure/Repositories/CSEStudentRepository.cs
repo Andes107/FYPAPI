@@ -36,10 +36,12 @@ namespace FYPAPI.Infrastructure.Repositories
         }
         public CSEStudent Get(string PK_tblCSEStudents, string etag, ref string newETag)
         {
+            if (PK_tblCSEStudents is null) return null;
             tblCSEStudent source = _context.tblCSEStudents
                 .Where(x => x.PK_tblCSEStudents == PK_tblCSEStudents)
                 .FirstOrDefault();
-            if (source.etag == etag)
+            if (source is null) return null;
+            if (etag != null && source.etag == etag)
                 return null;
             newETag = source.etag;
             return _mapper.Map<tblCSEStudent, CSEStudent>(source);
