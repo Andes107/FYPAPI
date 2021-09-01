@@ -71,6 +71,10 @@ namespace FYPAPI.Infrastructure
     }
     public partial class tblRequirementGrade
     {
+        public tblRequirementGrade()
+        {
+
+        }
         public tblRequirementGrade(string facultyUsername, string studentUsername, 
             decimal? proposalReport, decimal? progressReport, decimal? finalReport,
             decimal? presentation)

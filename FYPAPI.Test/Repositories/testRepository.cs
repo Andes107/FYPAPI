@@ -10,6 +10,7 @@ using FYPAPI.Infrastructure.Repositories;
 using System.Data.Entity.Core.EntityClient;
 using AutoMapper;
 using FYPAPI.Models;
+using FluentAssertions;
 
 namespace FYPAPI.Test.Repositories
 {
@@ -27,7 +28,10 @@ namespace FYPAPI.Test.Repositories
         private readonly IMapper _mapper;
         public testRepository()
         {
-            _config = new MapperConfiguration(cfg => cfg.CreateMap<tblCSEStudent, CSEStudent>());
+            _config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<tblCSEStudent, CSEStudent>();
+                cfg.CreateMap<tblProjectGroup, ProjectGroup>();
+            });
             _mapper = _config.CreateMapper();
             EntityConnection connection = Effort.EntityConnectionFactory.CreatePersistent("name=FYPContext");
             _context = new FYPContext(connection);
@@ -35,15 +39,33 @@ namespace FYPAPI.Test.Repositories
         }
         public void Dispose() { _context.Dispose(); }
         [Fact]
+        public void testListOrder()
+        {
+            //Arrange
+            //Seems that even they share the same elements, the are still different due to 
+            //hashcode
+            List<FYPCategory> first = new List<FYPCategory>() {
+                new FYPCategory() {PK_tblFypCategories = "AI"},
+                new FYPCategory() {PK_tblFypCategories = "DB"}
+            };
+            List<FYPCategory> second= new List<FYPCategory>() {
+                new FYPCategory() {PK_tblFypCategories = "DB"},
+                new FYPCategory() {PK_tblFypCategories = "AI"}
+            };
+            //Assert
+            //Assert.Equal(first, second);
+            first.Should().BeEquivalentTo(second);
+        }
+        [Fact]
         public void testCSEStudentRepositoryGetAll()
         {
             //Arrange
             ICSEStudent csestudentRepo = new CSEStudentRepository(_context, null, _config);
             //Act
-            List<CSEStudent> actualListOfStuds = csestudentRepo.GetAll().ToList();
-            List<CSEStudent> expectedListOfStuds = _mapper.Map<IEnumerable<tblCSEStudent>, IEnumerable<CSEStudent>>(FYPContextInitializer.studs).ToList();
+            IEnumerable<CSEStudent> actual = csestudentRepo.GetAll();
+            IEnumerable<CSEStudent> expected = _mapper.Map<IEnumerable<tblCSEStudent>, IEnumerable<CSEStudent>>(FYPContextInitializer.studs);
             //Assert
-            Assert.Equal(expectedListOfStuds, actualListOfStuds);
+            actual.Should().BeEquivalentTo(expected);
         }
         [Fact]
         public void testCSEStudentRepositorFindMany()
