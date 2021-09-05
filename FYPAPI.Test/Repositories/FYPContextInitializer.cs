@@ -229,17 +229,24 @@ namespace FYPAPI.Test.Repositories
             new tblInterestedIn(30, 7, 1)
         };
         public static void ContextInit(FYPContext context) {
-            /*            context.tblFypCategories.AddRange(categories);
-                        context.tblFaculties.AddRange(faculties);
-                        context.tblFyps.AddRange(fyps);
-                        context.tblProjectGroups.AddRange(groups);
-                        context.tblSupervises.AddRange(supervises);
-                        context.tblRequirementGrades.AddRange(grades);
-                        context.tblCSEStudents.AddRange(studs);
-                        context.tblInterestedIns.AddRange(interests);*/
+            context.tblFypCategories.AddRange(categories);
+            context.tblFaculties.AddRange(faculties);
+            context.tblFyps.AddRange(fyps);
+            context.tblProjectGroups.AddRange(groups);
+            context.tblSupervises.AddRange(supervises);
+            context.tblRequirementGrades.AddRange(grades);
+            context.tblCSEStudents.AddRange(studs);
+            context.tblInterestedIns.AddRange(interests);
 
             // Initialize FYPCategories
-            context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Artificial Intelligence" });
+            // Initialize Faculties
+            // Initialize FYP
+            //Initialize ProjectGroups
+            //Initialize Supervises
+            //Initialize RequirementGrades
+            //Initialize CSEStudents
+            //Initialize InterestedIns
+            /*context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Artificial Intelligence" });
             context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Computer Games" });
             context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Computer Security" });
             context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Database" });
@@ -254,7 +261,7 @@ namespace FYPAPI.Test.Repositories
             context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Software Technology" });
             context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Theory" });
             context.tblFypCategories.Add(new tblFypCategory() { PK_tblFypCategories = "Vision and Graphics" });
-            // Initialize Faculties
+
             context.tblFaculties.Add(new tblFaculty("cafarella", "Michelle Cafarella", "3702", "MC"));
             context.tblFaculties.Add(new tblFaculty("fan", "Jim Fan", "3372", "JF"));
             context.tblFaculties.Add(new tblFaculty("garcia", "Holly Garcia", "3068", "HG"));
@@ -272,7 +279,6 @@ namespace FYPAPI.Test.Repositories
             context.tblFaculties.Add(new tblFaculty("lock", "Karl Lock", "3532", "KL"));
             context.tblFaculties.Add(new tblFaculty("zhang", "Vincent Zhang", "3408", "VZ"));
 
-            // Initialize FYP
             context.tblFyps.Add(new tblFyp(1, "Learn Golf Using Kinect", "Microsoft Kinect allows a person's skeletal movement to be tracked and to recognize the person's speech. In this FYP, you will write an app using a Kinect or two Kinects (which the department will provide to you) to teach golfing strokes. You are required to track the golfing movements of a learner, compare the learner's movements with those from a master golfer and give feedback to the learner so that he/she can correct his/her movements.", "Artificial Intelligence", "project", "C++/C#; algorithm design; creative mind", 1, 2, true));
             context.tblFyps.Add(new tblFyp(2, "MOOC Data Analytics: Social Network Analysis of Discussion Forum Data", "Massive open online courses (MOOCs) on such online platforms as Coursera, edX, Khan Academy and Udacity are perceived by many people as reinventing education to a certain extent. A consequence of this recent trend is the availability of massive amounts of data from MOOCs for research in learning analytics and other areas. This FYP will make use of discussion forum data involving tens of thousands of students from several HKUST courses offered on Coursera. Some machine learning problems related to social network analysis will be studied.", "Artificial Intelligence", "thesis", "strong background in programming and mathematics; good background in mathematics is essential for learning the machine learning models; experience in programming on Linux/Unix platforms is a plus.", 1, 1, false));
             context.tblFyps.Add(new tblFyp(3, "Android Mobile Action RPG Game", "In this FYP you will design and implement an adventure computer game. You should propose an interesting game scenario (i.e., the story). It can be anything and does not have to be an adventure game, but must be interesting/funny/surprising. Simple ideas are often the best � like StoneAge UST a few years ago. Also, you need to draw some pictures that show how your game will look (e.g., a few main characters, scenes � can be hand-drawn or computer-drawn). Someone in the group needs to have the artistic skills to make the game attractive. Designing a fun and interesting game scenario is an important part of the FYP, as is implementing it. It doesn't matter what software package is used to implement the game (Java, Flash, Visual Basic), but it needs to be fun and interesting to play and watch. It can be a 3D RPG game if you choose. An interesting 2D game is also okay (e.g., dragons and monsters in the library maze of stacks).", "Computer Games", "project", "creativity", 1, 4, true));
@@ -303,7 +309,7 @@ namespace FYPAPI.Test.Repositories
             context.tblFyps.Add(new tblFyp(28, "Streaming Algorithms", "For this FYT on streaming algorithms, the student should have strong skills in algorithm design and implementation, as well as mathematics.", "Theory", "thesis", "COMP3711 or COMP3711H; algorithm design; programming; mathematics", 1, 1, true));
             context.tblFyps.Add(new tblFyp(29, "3D City Reconstruction from Images", "This FYP will investigate a methodology for the large-scale 3D reconstruction of cities from ground-level images. The goal is to produce detailed geometry and appearance that is well-suited for displaying as 'street views'. The FYP will provide key components for platforms dedicated to emerging 3D maps and digital city applications, greatly improving the current representation based on 2D panoramas.", "Vision and Graphics", "project", "C++ programming skills", 1, 4, true));
             context.tblFyps.Add(new tblFyp(30, "Photo Repairing", "Inpainting is originally a technique commonly used by conservators to unify a painting that has suffered paint loss. This FYP aims at analyzing various inpainting techniques and developing a real-world application for photo repairing (e.g., fixing damaged photos).", "Vision and Graphics", "project", "some background in mathematics and good programming skills.", 2, 3, false));
-            //Initialize ProjectGroups
+
             context.tblProjectGroups.Add(new tblProjectGroup() { groupCode = "MC1", assignedFYP = 2, reader = "ray", PK_tblProjectGroups = 1 });
             context.tblProjectGroups.Add(new tblProjectGroup() { groupCode = "MC2", assignedFYP = 11, reader = "ray", PK_tblProjectGroups = 2 });
             context.tblProjectGroups.Add(new tblProjectGroup() { groupCode = "JNHJ1", assignedFYP = 5, PK_tblProjectGroups = 3 });
@@ -321,7 +327,6 @@ namespace FYPAPI.Test.Repositories
             context.tblProjectGroups.Add(new tblProjectGroup(15, null, null, null));
             context.tblProjectGroups.Add(new tblProjectGroup(16, null, null, null));
 
-            //Initialize Supervises
             context.tblSupervises.Add(new tblSupervis("cafarella", 1));
             context.tblSupervises.Add(new tblSupervis("cafarella", 2));
             context.tblSupervises.Add(new tblSupervis("cafarella", 11));
@@ -361,13 +366,11 @@ namespace FYPAPI.Test.Repositories
             context.tblSupervises.Add(new tblSupervis("soliman", 25));
             context.tblSupervises.Add(new tblSupervis("soliman", 27));
 
-            //Initialize RequirementGrades
             context.tblRequirementGrades.Add(new tblRequirementGrade("naughton", "lesterlo", 66, 72, 75, 80));
             context.tblRequirementGrades.Add(new tblRequirementGrade("cafarella", "lesterlo", 66, 72, 75, 80));
             context.tblRequirementGrades.Add(new tblRequirementGrade("hui", "terrytam", 75, 67, 72, 77));
             context.tblRequirementGrades.Add(new tblRequirementGrade("naughton", "terrytam", 70, 65, 75, 80));
 
-            //Initialize CSEStudents
             context.tblCSEStudents.Add(new tblCSEStudent("brunoho", "Bruno Ho", 1));
             context.tblCSEStudents.Add(new tblCSEStudent("daisyyeung", "Daisy Yeung", 2));
             context.tblCSEStudents.Add(new tblCSEStudent("adamau", "Adam Au", 3));
@@ -409,7 +412,6 @@ namespace FYPAPI.Test.Repositories
             context.tblCSEStudents.Add(new tblCSEStudent("hughhawes", "Hugh Hawes", null));
             context.tblCSEStudents.Add(new tblCSEStudent("carlchan", "Carl Chan", null));
 
-            //Initialize InterestedIns
             context.tblInterestedIns.Add(new tblInterestedIn(1, 6, 1));
             context.tblInterestedIns.Add(new tblInterestedIn(1, 11, 1));
             context.tblInterestedIns.Add(new tblInterestedIn(2, 1, 2));
@@ -452,7 +454,7 @@ namespace FYPAPI.Test.Repositories
             context.tblInterestedIns.Add(new tblInterestedIn(26, 14, 1));
             context.tblInterestedIns.Add(new tblInterestedIn(29, 8, 4));
             context.tblInterestedIns.Add(new tblInterestedIn(30, 6, 2));
-            context.tblInterestedIns.Add(new tblInterestedIn(30, 7, 1));
+            context.tblInterestedIns.Add(new tblInterestedIn(30, 7, 1));*/
 
             context.SaveChanges();
         }
