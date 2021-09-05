@@ -16,9 +16,14 @@ namespace FYPAPI.Test.Repositories
 {
     public class repositoryFixture
     {
+        public int MyProperty { get; set; }
         public repositoryFixture()
         {
             Effort.Provider.EffortProviderConfiguration.RegisterProvider();
+            EntityConnection connection = Effort.EntityConnectionFactory.CreatePersistent("name=FYPContext");
+            FYPContext tempContext = new FYPContext(connection);
+            FYPContextInitializer.ContextInit(tempContext);
+            tempContext.Dispose();
         }
     }
     public class testRepository: IClassFixture<repositoryFixture>, IDisposable
@@ -32,7 +37,6 @@ namespace FYPAPI.Test.Repositories
             _mapper = _config.CreateMapper();
             EntityConnection connection = Effort.EntityConnectionFactory.CreatePersistent("name=FYPContext");
             _context = new FYPContext(connection);
-            FYPContextInitializer.ContextInit(_context);
         }
         public void Dispose() { _context.Dispose(); }
         [Fact]
@@ -64,16 +68,15 @@ namespace FYPAPI.Test.Repositories
             //Assert
             actual.Should().BeEquivalentTo(expected);
         }
-        [Fact]
-        public void testCSEStudentRepositorFindMany()
+        [Theory, ClassData(typeof(listOfCSEStudent))]
+        public void testCSEStudentRepositorFindMany(CSEStudent condition, List<CSEStudent> expected)
         {
             //Arrange
             ICSEStudent csestudentRepo = new CSEStudentRepository(_context, null, _config);
-            CSEStudent mockStud = new CSEStudent() { PK_tblCSEStudents = "brunoho" };
             //Act
-            List <CSEStudent> lsitOFStuds = csestudentRepo.FindMany(mockStud).ToList();
+            List <CSEStudent> actual = csestudentRepo.FindMany(condition).ToList();
             //Assert
-            Assert.Equal(1, lsitOFStuds.Count);
+            actual.Should().BeEquivalentTo(expected);
         }
     }
 }

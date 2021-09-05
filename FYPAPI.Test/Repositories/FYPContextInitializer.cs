@@ -10,7 +10,7 @@ namespace FYPAPI.Test.Repositories
 {
     public class FYPContextInitializer
     {
-        public static readonly IEnumerable<tblFypCategory> categories = new tblFypCategory[]{
+        public static IEnumerable<tblFypCategory> categories = new tblFypCategory[]{
             new tblFypCategory() { PK_tblFypCategories = "Artificial Intelligence" },
             new tblFypCategory() { PK_tblFypCategories = "Computer Games" },
             new tblFypCategory() { PK_tblFypCategories = "Computer Security" },
@@ -27,7 +27,7 @@ namespace FYPAPI.Test.Repositories
             new tblFypCategory() { PK_tblFypCategories = "Theory" },
             new tblFypCategory() { PK_tblFypCategories = "Vision and Graphics" }
             };
-        public static readonly IEnumerable<tblFaculty> faculties = new tblFaculty[] {
+        public static IEnumerable<tblFaculty> faculties = new tblFaculty[] {
             new tblFaculty("cafarella", "Michelle Cafarella", "3702", "MC"),
             new tblFaculty("fan", "Jim Fan", "3372", "JF"),
             new tblFaculty("garcia", "Holly Garcia", "3068", "HG"),
@@ -45,7 +45,7 @@ namespace FYPAPI.Test.Repositories
             new tblFaculty("lock", "Karl Lock", "3532", "KL"),
             new tblFaculty("zhang", "Vincent Zhang", "3408", "VZ")
         };
-        public static readonly IEnumerable<tblFyp> fyps = new tblFyp[]{
+        public static IEnumerable<tblFyp> fyps = new tblFyp[]{
             new tblFyp(1, "Learn Golf Using Kinect", "Microsoft Kinect allows a person's skeletal movement to be tracked and to recognize the person's speech. In this FYP, you will write an app using a Kinect or two Kinects (which the department will provide to you) to teach golfing strokes. You are required to track the golfing movements of a learner, compare the learner's movements with those from a master golfer and give feedback to the learner so that he/she can correct his/her movements.", "Artificial Intelligence", "project", "C++/C#; algorithm design; creative mind", 1, 2, true),
             new tblFyp(2, "MOOC Data Analytics: Social Network Analysis of Discussion Forum Data", "Massive open online courses (MOOCs) on such online platforms as Coursera, edX, Khan Academy and Udacity are perceived by many people as reinventing education to a certain extent. A consequence of this recent trend is the availability of massive amounts of data from MOOCs for research in learning analytics and other areas. This FYP will make use of discussion forum data involving tens of thousands of students from several HKUST courses offered on Coursera. Some machine learning problems related to social network analysis will be studied.", "Artificial Intelligence", "thesis", "strong background in programming and mathematics; good background in mathematics is essential for learning the machine learning models; experience in programming on Linux/Unix platforms is a plus.", 1, 1, false),
             new tblFyp(3, "Android Mobile Action RPG Game", "In this FYP you will design and implement an adventure computer game. You should propose an interesting game scenario (i.e., the story). It can be anything and does not have to be an adventure game, but must be interesting/funny/surprising. Simple ideas are often the best � like StoneAge UST a few years ago. Also, you need to draw some pictures that show how your game will look (e.g., a few main characters, scenes � can be hand-drawn or computer-drawn). Someone in the group needs to have the artistic skills to make the game attractive. Designing a fun and interesting game scenario is an important part of the FYP, as is implementing it. It doesn't matter what software package is used to implement the game (Java, Flash, Visual Basic), but it needs to be fun and interesting to play and watch. It can be a 3D RPG game if you choose. An interesting 2D game is also okay (e.g., dragons and monsters in the library maze of stacks).", "Computer Games", "project", "creativity", 1, 4, true),
@@ -77,7 +77,7 @@ namespace FYPAPI.Test.Repositories
             new tblFyp(29, "3D City Reconstruction from Images", "This FYP will investigate a methodology for the large-scale 3D reconstruction of cities from ground-level images. The goal is to produce detailed geometry and appearance that is well-suited for displaying as 'street views'. The FYP will provide key components for platforms dedicated to emerging 3D maps and digital city applications, greatly improving the current representation based on 2D panoramas.", "Vision and Graphics", "project", "C++ programming skills", 1, 4, true),
             new tblFyp(30, "Photo Repairing", "Inpainting is originally a technique commonly used by conservators to unify a painting that has suffered paint loss. This FYP aims at analyzing various inpainting techniques and developing a real-world application for photo repairing (e.g., fixing damaged photos).", "Vision and Graphics", "project", "some background in mathematics and good programming skills.", 2, 3, false)
         };
-        public static readonly IEnumerable<tblProjectGroup> groups = new tblProjectGroup[]{
+        public static IEnumerable<tblProjectGroup> groups = new tblProjectGroup[]{
             new tblProjectGroup() { groupCode = "MC1", assignedFYP = 2, reader = "ray", PK_tblProjectGroups = 1 },
             new tblProjectGroup() { groupCode = "MC2", assignedFYP = 11, reader = "ray", PK_tblProjectGroups = 2 },
             new tblProjectGroup() { groupCode = "JNHJ1", assignedFYP = 5, PK_tblProjectGroups = 3 },
@@ -95,7 +95,7 @@ namespace FYPAPI.Test.Repositories
             new tblProjectGroup(15, null, null, null),
             new tblProjectGroup(16, null, null, null)
         };
-        public static readonly IEnumerable<tblSupervis> supervises = new tblSupervis[] {
+        public static IEnumerable<tblSupervis> supervises = new tblSupervis[] {
             new tblSupervis("cafarella", 1),
             new tblSupervis("cafarella", 2),
             new tblSupervis("cafarella", 11),
@@ -135,13 +135,13 @@ namespace FYPAPI.Test.Repositories
             new tblSupervis("soliman", 25),
             new tblSupervis("soliman", 27)
         };
-        public static readonly IEnumerable<tblRequirementGrade> grades = new tblRequirementGrade[] {
+        public static IEnumerable<tblRequirementGrade> grades = new tblRequirementGrade[] {
             new tblRequirementGrade("naughton", "lesterlo", 66, 72, 75, 80),
             new tblRequirementGrade("cafarella", "lesterlo", 66, 72, 75, 80),
             new tblRequirementGrade("hui", "terrytam", 75, 67, 72, 77),
             new tblRequirementGrade("naughton", "terrytam", 70, 65, 75, 80)
         };
-        public static readonly IEnumerable<tblCSEStudent> studs = new tblCSEStudent[] {
+        public static IEnumerable<tblCSEStudent> studs = new tblCSEStudent[] {
             new tblCSEStudent("brunoho", "Bruno Ho", 1),
             new tblCSEStudent("daisyyeung", "Daisy Yeung", 2),
             new tblCSEStudent("adamau", "Adam Au", 3),
@@ -183,7 +183,7 @@ namespace FYPAPI.Test.Repositories
             new tblCSEStudent("hughhawes", "Hugh Hawes", null),
             new tblCSEStudent("carlchan", "Carl Chan", null)
         };
-        public static readonly IEnumerable<tblInterestedIn> interests = new tblInterestedIn[]{
+        public static IEnumerable<tblInterestedIn> interests = new tblInterestedIn[]{
             new tblInterestedIn(1, 6, 1),
             new tblInterestedIn(1, 11, 1),
             new tblInterestedIn(2, 1, 2),
