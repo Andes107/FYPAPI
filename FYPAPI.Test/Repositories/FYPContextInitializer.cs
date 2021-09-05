@@ -142,7 +142,7 @@ namespace FYPAPI.Test.Repositories
             new tblRequirementGrade("naughton", "terrytam", 70, 65, 75, 80)
         };
         public static IEnumerable<tblCSEStudent> studs = new tblCSEStudent[] {
-            new tblCSEStudent("brunoho"     , "Bruno Ho"    , 1),
+            new tblCSEStudent("brunoho"     , "Bruno Ho"    , 1) { etag = "20121231210032"},
             new tblCSEStudent("daisyyeung"  , "Daisy Yeung" , 2),
             new tblCSEStudent("adamau"      , "Adam Au"     , 3),
             new tblCSEStudent("lesterlo"    , "Lester Lo"   , 4),

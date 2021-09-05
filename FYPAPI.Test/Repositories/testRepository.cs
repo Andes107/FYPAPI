@@ -33,7 +33,9 @@ namespace FYPAPI.Test.Repositories
         private readonly IMapper _mapper;
         public testRepository()
         {
-            _config = new MapperConfiguration(cfg => cfg.CreateMap<tblCSEStudent, CSEStudent>());
+            _config = new MapperConfiguration(cfg => cfg.CreateMap<tblCSEStudent, CSEStudent>()
+                /*.ForSourceMember(src => src.tblProjectGroup, opt => opt.DoNotValidate())
+                .ForSourceMember(src => src.tblRequirementGrades, opt => opt.DoNotValidate())*/);
             _mapper = _config.CreateMapper();
             EntityConnection connection = Effort.EntityConnectionFactory.CreatePersistent("name=FYPContext");
             _context = new FYPContext(connection);
@@ -77,6 +79,17 @@ namespace FYPAPI.Test.Repositories
             List <CSEStudent> actual = csestudentRepo.FindMany(condition).ToList();
             //Assert
             actual.Should().BeEquivalentTo(expected);
+        }
+        [Theory, ClassData(typeof(CSEStudentSingleton))]
+        public void testCSEStudentRepositoryGet(string PK_tblCSEStudents, string etag, string newETag, CSEStudent expected, string expectedTag)
+        {
+            //Arrange
+            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, _config.CreateMapper(), _config);
+            //Act
+            CSEStudent actual = csestudentRepo.Get(PK_tblCSEStudents, etag, ref newETag);
+            //Assert
+            Assert.Equal(expected, actual);
+            Assert.Equal(expectedTag, newETag);
         }
     }
 }

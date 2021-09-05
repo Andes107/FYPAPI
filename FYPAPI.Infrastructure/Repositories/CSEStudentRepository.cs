@@ -41,8 +41,7 @@ namespace FYPAPI.Infrastructure.Repositories
                 .Where(x => x.PK_tblCSEStudents == PK_tblCSEStudents)
                 .FirstOrDefault();
             if (source is null) return null;
-            if (etag != null && source.etag == etag)
-                return null;
+            if (!string.IsNullOrEmpty(etag) && source.etag == etag) return null;
             newETag = source.etag;
             return _mapper.Map<tblCSEStudent, CSEStudent>(source);
         }

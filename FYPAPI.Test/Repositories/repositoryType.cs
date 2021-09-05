@@ -81,4 +81,39 @@ namespace FYPAPI.Test.Repositories
         IEnumerator IEnumerable.GetEnumerator()
         { return GetEnumerator(); }
     }
+    public class CSEStudentSingleton: IEnumerable<object[]>
+    {
+        private readonly List<object[]> _data = new List<object[]>
+        {
+            new object[] {
+                null, "20121231230023", "", null, ""
+            },
+            new object[] {
+                "does-not-exist", "", null, null, null
+            },
+            new object[] {
+                "brunoho", "", "",
+                new CSEStudent(){ PK_tblCSEStudents = "brunoho"     ,name =  "Bruno Ho"    ,groupId =  1 },
+                "20121231210032"
+            },
+            new object[] {
+                "brunoho", null, "",
+                new CSEStudent(){ PK_tblCSEStudents = "brunoho"     ,name =  "Bruno Ho"    ,groupId =  1 },
+                "20121231210032"
+            },
+            new object[] {
+                "brunoho", "wrong-etag", "",
+                new CSEStudent(){ PK_tblCSEStudents = "brunoho"     ,name =  "Bruno Ho"    ,groupId =  1 },
+                "20121231210032"
+            },
+            new object[] {
+                "brunoho", "20121231210032", "", null, ""
+            }
+        };
+        public IEnumerator<object[]> GetEnumerator()
+        { return _data.GetEnumerator(); }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        { return GetEnumerator(); }
+    }
 }
