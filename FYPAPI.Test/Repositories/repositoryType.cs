@@ -107,7 +107,9 @@ namespace FYPAPI.Test.Repositories
                 "20121231210032"
             },
             new object[] {
-                "brunoho", "20121231210032", "", null, ""
+                "brunoho", "20121231210032", "", 
+                new CSEStudent(){ PK_tblCSEStudents = "brunoho"     ,name =  "Bruno Ho"    ,groupId =  1 },
+                ""
             }
         };
         public IEnumerator<object[]> GetEnumerator()

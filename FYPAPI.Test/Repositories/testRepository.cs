@@ -33,9 +33,7 @@ namespace FYPAPI.Test.Repositories
         private readonly IMapper _mapper;
         public testRepository()
         {
-            _config = new MapperConfiguration(cfg => cfg.CreateMap<tblCSEStudent, CSEStudent>()
-                /*.ForSourceMember(src => src.tblProjectGroup, opt => opt.DoNotValidate())
-                .ForSourceMember(src => src.tblRequirementGrades, opt => opt.DoNotValidate())*/);
+            _config = new MapperConfiguration(cfg => cfg.CreateMap<tblCSEStudent, CSEStudent>());
             _mapper = _config.CreateMapper();
             EntityConnection connection = Effort.EntityConnectionFactory.CreatePersistent("name=FYPContext");
             _context = new FYPContext(connection);

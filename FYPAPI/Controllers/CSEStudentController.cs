@@ -24,10 +24,10 @@ namespace FYPAPI.Controllers
         [Route("getone")]
         public HttpResponseMessage GetOne(string PK_tblCSEStudents, [IfNoneMatch]string etag)
         {
-            string newETag = etag;
+            string newETag = "";
             CSEStudent stud = _context.CSEStudents.Get(PK_tblCSEStudents, etag, ref newETag);
-            if (stud is null)
-                return new HttpResponseMessage(HttpStatusCode.NotModified);
+            if (stud is null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+            if (string.IsNullOrEmpty(newETag)) return new HttpResponseMessage(HttpStatusCode.NotModified);
             HttpResponseMessage returnMessage = Request.CreateResponse(HttpStatusCode.OK, stud);
             returnMessage.Headers.ETag = new EntityTagHeaderValue(newETag);
             return returnMessage;
