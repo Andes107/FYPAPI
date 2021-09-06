@@ -14,10 +14,9 @@ namespace FYPAPI.GenericConverter
                 return true;
             return base.CanConvertFrom(context, sourceType);
         }
-
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            var strVal = value as String;
+            string strVal = value as string;
             if (string.IsNullOrEmpty(strVal))
                 return new T();
 
