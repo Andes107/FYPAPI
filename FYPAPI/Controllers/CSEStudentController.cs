@@ -21,7 +21,7 @@ namespace FYPAPI.Controllers
         [Route("getmany")]
         public IHttpActionResult GetMany(CSEStudent student) { return Ok(_context.CSEStudents.FindMany(student)); }
         [HttpGet]
-        [Route("getone")]
+        [Route("getone/{PK_tblCSEStudents}")]
         public HttpResponseMessage GetOne(string PK_tblCSEStudents, [IfNoneMatch]string etag)
         {
             string newETag = "";

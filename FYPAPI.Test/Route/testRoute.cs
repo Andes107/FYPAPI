@@ -28,5 +28,20 @@ namespace FYPAPI.Test.Route
             Assert.Equal(typeof(CSEStudentController), mockTestHelper.GetControllerType());
             Assert.Equal("GetMany", mockTestHelper.GetActionName());
         }
+        [Theory]
+        [InlineData("https://localhost:44359/api/csestudent/getone/1")]
+        [InlineData("https://localhost:44359/api/csestudent/getone")]
+        public void testGetOne(string requestUrl)
+        {
+            //Arrange
+            HttpConfiguration mockConfig = new HttpConfiguration();
+            WebApiConfig.Register(mockConfig);
+            mockConfig.EnsureInitialized();
+            HttpRequestMessage mockRequest = new HttpRequestMessage(HttpMethod.Get, requestUrl);
+            testHelper mockTestHelper = new testHelper(mockConfig, mockRequest);
+            //Assert
+            Assert.Equal(typeof(CSEStudentController), mockTestHelper.GetControllerType());
+            Assert.Equal("GetOne", mockTestHelper.GetActionName());
+        }
     }
 }
