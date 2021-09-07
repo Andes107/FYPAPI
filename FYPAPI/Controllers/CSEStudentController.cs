@@ -29,7 +29,7 @@ namespace FYPAPI.Controllers
             if (stud is null) return new HttpResponseMessage(HttpStatusCode.NotFound);
             if (newETag == "") return new HttpResponseMessage(HttpStatusCode.NotModified);
             HttpResponseMessage returnMessage = Request.CreateResponse(HttpStatusCode.OK, stud);
-            returnMessage.Headers.ETag = new EntityTagHeaderValue(newETag);
+            returnMessage.Headers.ETag = new EntityTagHeaderValue('\"' + newETag + '\"');
             return returnMessage;
         }
     }
