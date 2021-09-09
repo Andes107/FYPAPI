@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.Models;
 
-namespace FYPAPI.UOWRepositories
+namespace FYPAPI.Infrastructure.UOWRepositories
 {
     public interface ICSEStudent : IRepository<CSEStudent> { CSEStudent Get(string PK_tblCSEStudents, string etag, ref string newETag); }
     public interface IFaculty : IRepository<Faculty> { Faculty Get(string PK_tblFaculties, string etag, ref string newETag);}

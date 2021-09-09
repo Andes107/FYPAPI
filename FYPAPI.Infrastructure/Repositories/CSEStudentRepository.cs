@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using FYPAPI.UOWRepositories;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.UOWRepositories;
+using FYPAPI.Infrastructure.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
@@ -14,13 +14,13 @@ namespace FYPAPI.Infrastructure.Repositories
     public class CSEStudentRepository : ICSEStudent
     {
         private readonly FYPContext _context;
-        private readonly IMapper _mapper;
         private readonly MapperConfiguration _config;
-        public CSEStudentRepository(FYPContext context, IMapper mapper, MapperConfiguration config) 
+        private readonly IMapper _mapper;
+        public CSEStudentRepository(FYPContext context, MapperConfiguration config, IMapper mapper) 
         { 
             _context = context;
-            _mapper = mapper;
             _config = config;
+            _mapper = mapper;
         }
         public IEnumerable<CSEStudent> GetAll()
         {

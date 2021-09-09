@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using FYPAPI.GenericConverter;
+using FYPAPI.Infrastructure.GenericConverter;
 
-namespace FYPAPI.Models
+namespace FYPAPI.Infrastructure.Models
 {
     [TypeConverter(typeof(Converter<CSEStudent>))]
     public class CSEStudent: IEquatable<CSEStudent>

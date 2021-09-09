@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using FYPAPI.UOWRepositories;
+using FYPAPI.Infrastructure.UOWRepositories;
 using FYPAPI.Infrastructure;
 using FYPAPI.Infrastructure.Repositories;
 using System.Data.Entity.Core.EntityClient;
 using AutoMapper;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.Models;
 using FluentAssertions;
 
 namespace FYPAPI.Test.Repositories
@@ -61,7 +61,7 @@ namespace FYPAPI.Test.Repositories
         public void testCSEStudentRepositoryGetAll()
         {
             //Arrange
-            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, null, _config);
+            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, _config, null);
             //Act
             IEnumerable<CSEStudent> actual = csestudentRepo.GetAll();
             IEnumerable<CSEStudent> expected = _mapper.Map<IEnumerable<tblCSEStudent>, IEnumerable<CSEStudent>>(FYPContextInitializer.studs);
@@ -72,7 +72,7 @@ namespace FYPAPI.Test.Repositories
         public void testCSEStudentRepositorFindMany(CSEStudent condition, List<CSEStudent> expected)
         {
             //Arrange
-            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, null, _config);
+            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, _config, null);
             //Act
             List <CSEStudent> actual = csestudentRepo.FindMany(condition).ToList();
             //Assert
@@ -82,7 +82,7 @@ namespace FYPAPI.Test.Repositories
         public void testCSEStudentRepositoryGet(string PK_tblCSEStudents, string etag, string newETag, CSEStudent expected, string expectedTag)
         {
             //Arrange
-            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, _mapper, _config);
+            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, _config, _mapper);
             //Act
             CSEStudent actual = csestudentRepo.Get(PK_tblCSEStudents, etag, ref newETag);
             //Assert

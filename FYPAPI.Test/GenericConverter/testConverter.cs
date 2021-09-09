@@ -1,8 +1,8 @@
 ﻿using System;
 using Xunit;
 using Moq;
-using FYPAPI.Models;
-using FYPAPI.GenericConverter;
+using FYPAPI.Infrastructure.Models;
+using FYPAPI.Infrastructure.GenericConverter;
 using System.ComponentModel;
 
 namespace FYPAPI.Test.GenericConverter

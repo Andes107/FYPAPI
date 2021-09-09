@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.Models;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.Controllers;
 using System.Web.Http.ValueProviders;

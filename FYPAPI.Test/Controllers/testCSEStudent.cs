@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 using Xunit;
 using Moq;
-using FYPAPI.UOWRepositories;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.UOWRepositories;
+using FYPAPI.Infrastructure.Models;
 using FYPAPI.Controllers;
 using System.Web.Http;
 using System.Net.Http;

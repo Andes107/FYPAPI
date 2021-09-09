@@ -7,8 +7,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web.Http;
 using FYPAPI.BindingAttribute;
-using FYPAPI.Models;
-using FYPAPI.UOWRepositories;
+using FYPAPI.Infrastructure.Models;
+using FYPAPI.Infrastructure.UOWRepositories;
 
 namespace FYPAPI.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FYPAPI.UOWRepositories
+namespace FYPAPI.Infrastructure.UOWRepositories
 {
     public interface IRepository<TEntity> where TEntity: class
     {

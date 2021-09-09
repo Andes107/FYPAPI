@@ -2,7 +2,7 @@
 using Moq;
 using Xunit;
 using FYPAPI;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.Models;
 using System.Web.Http;
 using System.Net.Http;
 using System.Net.Http.Headers;

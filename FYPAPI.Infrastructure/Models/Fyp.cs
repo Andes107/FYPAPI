@@ -1,8 +1,8 @@
-﻿using FYPAPI.GenericConverter;
+﻿using FYPAPI.Infrastructure.GenericConverter;
 using System;
 using System.ComponentModel;
 
-namespace FYPAPI.Models
+namespace FYPAPI.Infrastructure.Models
 {
     [TypeConverter(typeof(Converter<Fyp>))]
     public class Fyp: IEquatable<Fyp>

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.Models;
 using System.Collections;
 
 namespace FYPAPI.Test.GenericConverter

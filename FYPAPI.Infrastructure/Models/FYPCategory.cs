@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FYPAPI.Models
+namespace FYPAPI.Infrastructure.Models
 {
     public class FYPCategory: IEquatable<FYPCategory>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FYPAPI.UOWRepositories
+namespace FYPAPI.Infrastructure.UOWRepositories
 {
     public interface IUnitOfWork: IDisposable
     {

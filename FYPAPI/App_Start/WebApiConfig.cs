@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using Unity;
+using FYPAPI.Injection;
+using FYPAPI.Infrastructure.UOWRepositories;
+using FYPAPI.Infrastructure.Repositories;
 
 namespace FYPAPI
 {
@@ -30,6 +34,10 @@ namespace FYPAPI
 
             XmlMediaTypeFormatter xml = GlobalConfiguration.Configuration.Formatters.XmlFormatter;
             xml.Indent = true;
+
+            /*var container = new UnityContainer();
+            container.RegisterType<IUnitOfWork, ImplementedUOW>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);*/
         }
     }
 }

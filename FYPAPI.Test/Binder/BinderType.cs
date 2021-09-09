@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.Models;
 
 namespace FYPAPI.Test.Binder
 {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Moq;
 using FYPAPI.Binder;
-using FYPAPI.Models;
+using FYPAPI.Infrastructure.Models;
 using System.Web.Http.Controllers;
 /*
     1.  No Http?

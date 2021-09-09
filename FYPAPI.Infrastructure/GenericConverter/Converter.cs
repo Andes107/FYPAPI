@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 
-namespace FYPAPI.GenericConverter
+namespace FYPAPI.Infrastructure.GenericConverter
 {
     public class Converter<T> : TypeConverter where T : new()
     {
