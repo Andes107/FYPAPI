@@ -16,7 +16,7 @@ namespace FYPAPI.Test.BindingAttribute
     {
         [Theory]
         [InlineData("\"20201231094523\"")]
-        //[InlineData(null, false)]
+        [InlineData("\"\"")]
         public void testHasETag(string etagValue)
         {
             string parameterName = "etag";

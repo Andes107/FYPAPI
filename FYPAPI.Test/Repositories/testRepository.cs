@@ -82,7 +82,7 @@ namespace FYPAPI.Test.Repositories
         public void testCSEStudentRepositoryGet(string PK_tblCSEStudents, string etag, string newETag, CSEStudent expected, string expectedTag)
         {
             //Arrange
-            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, _config.CreateMapper(), _config);
+            ICSEStudent csestudentRepo = new CSEStudentRepository(_context, _mapper, _config);
             //Act
             CSEStudent actual = csestudentRepo.Get(PK_tblCSEStudents, etag, ref newETag);
             //Assert
