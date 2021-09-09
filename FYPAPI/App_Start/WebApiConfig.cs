@@ -8,6 +8,7 @@ using Unity;
 using FYPAPI.Injection;
 using FYPAPI.Infrastructure.UOWRepositories;
 using FYPAPI.Infrastructure.Repositories;
+using Unity.Lifetime;
 
 namespace FYPAPI
 {
@@ -35,9 +36,7 @@ namespace FYPAPI
             XmlMediaTypeFormatter xml = GlobalConfiguration.Configuration.Formatters.XmlFormatter;
             xml.Indent = true;
 
-            /*var container = new UnityContainer();
-            container.RegisterType<IUnitOfWork, ImplementedUOW>(new HierarchicalLifetimeManager());
-            config.DependencyResolver = new UnityResolver(container);*/
+            UnityConfig.RegisterComponents(config);
         }
     }
 }
